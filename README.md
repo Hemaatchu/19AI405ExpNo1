@@ -1,6 +1,6 @@
 <h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
-<h3>Name: Saravanan N</h3>
-<h3>Register Number/Staff Id: TSML006</h3>
+<h3>Name: Hemavathy S</h3>
+<h3>Register Number: 212223230076</h3>
 
 
 <h3>AIM:</h3>
@@ -40,3 +40,52 @@
 <p>Treat unhealthy patients in each room. And check for the unhealthy patients in random room</p>
 <h3>STEP 5:</h3>
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
+
+## Program:
+```
+import random
+
+class PatientRoom:
+    def __init__(self, id):
+        self.id = id
+        self.temperature = random.uniform(97, 102)
+        self.bp = random.randint(90, 160)
+        self.hr = random.randint(60, 120)
+
+    def is_unhealthy(self):
+        return self.temperature > 98.5 or self.bp > 140 or self.bp < 100 or self.hr > 100 or self.hr < 60
+
+class MedicineAgent:
+    def __init__(self):
+        self.rooms = [PatientRoom(0), PatientRoom(1)]
+        self.current = 0
+        self.score = 0
+
+    def check_and_treat(self):
+        room = self.rooms[self.current]
+        if room.is_unhealthy():
+            print(f"Room {room.id}: Temp={room.temperature:.2f}, BP={room.bp}, HR={room.hr} -> Unhealthy! Prescribing medicine...")
+            self.score += 1
+        else:
+            print(f"Room {room.id}: Temp={room.temperature:.2f}, BP={room.bp}, HR={room.hr} -> Healthy, no medicine needed.")
+    
+    def move(self):
+        self.current = (self.current + 1) % len(self.rooms)
+        self.score -= 1
+        print(f"Agent moved to Room {self.current}")
+
+    def run(self, steps):
+        for _ in range(steps):
+            self.check_and_treat()
+            self.move()
+        print("Final Performance Score:", self.score)
+
+agent = MedicineAgent()
+agent.run(6)
+
+```
+## Output:
+<img width="958" height="874" alt="image" src="https://github.com/user-attachments/assets/85eaf4ea-ea92-4f77-ba75-1d264f270baf" />
+
+## Result:
+Thus the Developing AI Agent with PEAS Description was implemented using python programming.
